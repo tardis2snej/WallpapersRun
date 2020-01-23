@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WallpapersRun.Properties" GeneratedClassName="Settings1">
+  <Profiles />
+  <Settings>
+    <Setting Name="nextUpdTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">1753-01-01</Value>
+    </Setting>
+    <Setting Name="updInterval" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">1.00:00:00</Value>
+    </Setting>
+    <Setting Name="wallpapersPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="isDailyUpd" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
