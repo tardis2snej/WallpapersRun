@@ -61,13 +61,22 @@ namespace WallpapersRun.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool isDailyUpd {
             get {
                 return ((bool)(this["isDailyUpd"]));
             }
             set {
                 this["isDailyUpd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("WallpapersSequence\\WallpaperChange")]
+        public string taskSheldurerPath {
+            get {
+                return ((string)(this["taskSheldurerPath"]));
             }
         }
     }

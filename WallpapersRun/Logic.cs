@@ -6,8 +6,6 @@ namespace WallpapersRun
 {
     class Logic
     {
-        static readonly string taskSheldurerPath = "WallpapersSequence\\WallpaperChange";
-
         public static bool isTimeToUpdate()
         {
             if (Properties.Settings1.Default.nextUpdTime <= DateTime.Now)
@@ -30,7 +28,6 @@ namespace WallpapersRun
             }
             if (allWallpapers.Length == 0)
             {
-                Console.WriteLine("No wallpapers in directory " + Properties.Settings1.Default.wallpapersPath);
                 return null;
             }
             string nextWalpaperPath = allWallpapers[0].FullName;
@@ -50,11 +47,25 @@ namespace WallpapersRun
 
         public static void SetNextUpdateTime()
         {
+            DateTime newTime;
             if (Properties.Settings1.Default.isDailyUpd)
-                Properties.Settings1.Default.nextUpdTime = Properties.Settings1.Default.nextUpdTime.Add(Properties.Settings1.Default.updInterval);
+            {
+                newTime = new DateTime(
+                    DateTime.Now.Year,
+                    DateTime.Now.Month,
+                    DateTime.Now.Day + 1,
+                    Properties.Settings1.Default.updInterval.Hours,
+                    Properties.Settings1.Default.updInterval.Minutes,
+                    00);
+            }
             else
-                Properties.Settings1.Default.nextUpdTime = DateTime.Now.Add(Properties.Settings1.Default.updInterval);
-            Properties.Settings1.Default.Save();
+            {
+                newTime = DateTime.Now.Add(Properties.Settings1.Default.updInterval);
+                newTime = newTime.Subtract(new TimeSpan(00, 00, newTime.Second));
+                if (newTime < DateTime.Now)
+                    newTime.AddMinutes(1);
+            }
+            Properties.Settings1.Default.nextUpdTime = newTime;
         }
 
         public static void CreateSheduledTask()
@@ -65,14 +76,13 @@ namespace WallpapersRun
             taskDefinition.RegistrationInfo.Description = "Changes your wallpaper to next in list when the designated time comes";
 
             taskDefinition.Triggers.Add(new TimeTrigger(Properties.Settings1.Default.nextUpdTime));
-            //taskDefinition.Triggers.Add(new TimeTrigger(DateTime.Now.AddMinutes(1)));
             taskDefinition.Actions.Add(new ExecAction(System.Reflection.Assembly.GetExecutingAssembly().Location, "-s", null));
 
             taskDefinition.Settings.DisallowStartIfOnBatteries = false;
             taskDefinition.Settings.StopIfGoingOnBatteries = false;
             taskDefinition.Settings.StartWhenAvailable = true;
 
-            TaskService.Instance.RootFolder.RegisterTaskDefinition(taskSheldurerPath, taskDefinition);
+            TaskService.Instance.RootFolder.RegisterTaskDefinition(Properties.Settings1.Default.taskSheldurerPath, taskDefinition);
         }
     }
 }
