@@ -79,5 +79,17 @@ namespace WallpapersRun.Properties {
                 return ((string)(this["taskSheldurerPath"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1753-01-01")]
+        public global::System.DateTime lastUpdSetTo {
+            get {
+                return ((global::System.DateTime)(this["lastUpdSetTo"]));
+            }
+            set {
+                this["lastUpdSetTo"] = value;
+            }
+        }
     }
 }

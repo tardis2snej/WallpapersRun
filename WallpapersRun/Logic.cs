@@ -50,13 +50,26 @@ namespace WallpapersRun
             DateTime newTime;
             if (Properties.Settings1.Default.isDailyUpd)
             {
-                newTime = new DateTime(
+                DateTime oldTime = Properties.Settings1.Default.lastUpdSetTo;
+                DateTime newTimePrev = new DateTime(
                     DateTime.Now.Year,
                     DateTime.Now.Month,
-                    DateTime.Now.Day + 1,
+                    DateTime.Now.Day,
                     Properties.Settings1.Default.updInterval.Hours,
                     Properties.Settings1.Default.updInterval.Minutes,
                     00);
+                newTimePrev = newTimePrev.AddDays(1);
+                newTime = newTimePrev;
+                if (oldTime == newTimePrev && oldTime.Month == 12)
+                {
+                    newTime = newTime.AddYears(1);
+                    newTime = newTime.AddMonths(-12);
+                }
+                if (oldTime == newTimePrev && (oldTime.Day == 28 || oldTime.Day == 29 || oldTime.Day == 30 || oldTime.Day == 31))
+                {
+                    newTime = newTime.AddDays(-1 * (oldTime.Day - 1));
+                    newTime = newTime.AddMonths(1);
+                }
             }
             else
             {
@@ -65,6 +78,7 @@ namespace WallpapersRun
                 if (newTime < DateTime.Now)
                     newTime.AddMinutes(1);
             }
+            Properties.Settings1.Default.lastUpdSetTo = Properties.Settings1.Default.nextUpdTime;
             Properties.Settings1.Default.nextUpdTime = newTime;
         }
 

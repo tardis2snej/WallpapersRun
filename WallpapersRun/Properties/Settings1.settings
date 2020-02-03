@@ -17,5 +17,8 @@
     <Setting Name="taskSheldurerPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">WallpapersSequence\WallpaperChange</Value>
     </Setting>
+    <Setting Name="lastUpdSetTo" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">1753-01-01</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
