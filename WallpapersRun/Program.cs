@@ -11,7 +11,7 @@ namespace WallpapersRun
         [STAThread]
         static void Main(string[] args)
         {
-            //Update();
+            Update();
             if (args.Length == 0)
             {
                 Application.EnableVisualStyles();
